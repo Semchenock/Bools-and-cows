@@ -13,7 +13,6 @@ function countBoolsAndCows(guess) {
   let bools = 0;
   let cows = 0;
   for (let i = 0; i < dificulty; i++) {
-    console.log(i);
     if (answer.indexOf(guess[i]) !== -1) {
       if (answer.indexOf(guess[i]) === i) {
         bools++;
@@ -22,10 +21,21 @@ function countBoolsAndCows(guess) {
       cows++;
     }
   }
+  boolsAndCowsQty.bools = bools
+  boolsAndCowsQty.cows = cows
   return `Bools: ${bools} Cows: ${cows}`;
 }
 let dificulty = 3;
 let answer = numGenerator(dificulty);
-console.log(answer);
-let message = countBoolsAndCows("123");
-console.log(message);
+let guess 
+let message
+const boolsAndCowsQty = {
+  bools: 0,
+  cows: 0,
+} 
+window.addEventListener('load', function (){
+  document.querySelector('.check').addEventListener('click', function () { 
+  guess = document.querySelector('.guess').value
+  message =  countBoolsAndCows(guess)
+  console.log(answer, guess, message)
+})})
