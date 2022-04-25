@@ -1,3 +1,24 @@
+const checkBtn = document.querySelector(".check");
+const guessInput = document.querySelector(".guess");
+const messageOutput = document.querySelector(".message");
+const againBtn = document.querySelector(".again");
+const dificultyBtns = document.querySelectorAll(".dificulty");
+const history = document.querySelector(".history");
+const hightscoreOutput = document.querySelector(".hightscore");
+const guessLength = document.querySelector(".guessLength");
+
+let dificulty = 3;
+let answer = numGenerator(dificulty);
+console.log(answer);
+let guess;
+let message;
+let hightscore = 999;
+let score = 0;
+const boolsAndCowsQty = {
+  bools: 0,
+  cows: 0,
+};
+
 function numGenerator(length) {
   let generated = "";
   for (let i = 0; i < length; i++) {
@@ -26,78 +47,59 @@ function countBoolsAndCows(guess) {
   return `Bools: ${bools} Cows: ${cows}`;
 }
 function updateHistory(message) {
-  document.querySelector(".message").textContent = message;
-  document.querySelector(".history").textContent =
-    document.querySelector(".history").textContent +
-    guess +
-    " " +
-    message +
-    "\n";
-  document.querySelector(".guess").value = null;
+  messageOutput.textContent = message;
+  history.textContent = history.textContent + guess + " " + message + "\n";
+  guessInput.value = null;
 }
 function endGame() {
-  document.querySelector(".message").textContent = `You win! It's ${answer}!`;
+  messageOutput.textContent = `You win! It's ${answer}!`;
   if (hightscore > score + 1) {
     hightscore = score + 1;
-    document.querySelector(
-      ".hightscore"
-    ).textContent = `Hightscore: ${hightscore}`;
+    hightscoreOutput.textContent = `Hightscore: ${hightscore}`;
   }
 
-  document.querySelector(".guess").value = null;
-  document.querySelector(".check").setAttribute("disabled", "true");
+  guessInput.value = null;
+  checkBtn.setAttribute("disabled", "true");
 }
 function restart() {
-  document.querySelector(
-    ".guessLength"
-  ).textContent = `Guess ${dificulty} digit number`;
-  document.querySelector(".guess").value = null;
-  document.querySelector(".check").removeAttribute("disabled");
-  document.querySelector(".message").textContent = "Start guessing!";
-  document.querySelector(".history").textContent = "";
+  guessLength.textContent = `Guess ${dificulty} digit number`;
+  guessInput.value = null;
+  checkBtn.removeAttribute("disabled");
+  messageOutput.textContent = "Start guessing!";
+  history.textContent = "";
 }
-let dificulty = 3;
-let answer = numGenerator(dificulty);
-console.log(answer);
-let guess;
-let message;
-let hightscore = 999;
-let score = 0;
-const boolsAndCowsQty = {
-  bools: 0,
-  cows: 0,
-};
-window.addEventListener("load", function () {
-  document.querySelector(".check").addEventListener("click", function () {
-    const inputValue = document.querySelector(".guess").value;
-    if (inputValue.length === dificulty) {
-      guess = inputValue;
-    } else {
-      document.querySelector(
-        ".message"
-      ).textContent = `Wrong input. Send ${dificulty} didgit number`;
-      document.querySelector(".guess").value = null;
-      return;
-    }
-    message = countBoolsAndCows(guess);
-    if (boolsAndCowsQty.bools !== 3) {
-      updateHistory(message);
-      score++;
-    }
-    if (boolsAndCowsQty.bools === 3) {
-      endGame();
-    }
-  });
-  document.querySelector(".again").addEventListener("click", function () {
-    restart();
-    answer = numGenerator(dificulty);
-    console.log(answer);
-    score = 0;
-  });
-  document
-    .querySelector(".dificulty")
-    .addEventListener("click", function (btn) {
-      dificulty = btn.id;
-      console.log(dificulty);
-    });
+function changeDificulty(newDificulty) {
+  dificulty = newDificulty;
+  restart();
+  hightscoreOutput.textContent = "Hightscore: - ";
+}
+
+checkBtn.addEventListener("click", function () {
+  const inputValue = guessInput.value;
+  if (inputValue.length === dificulty) {
+    guess = inputValue;
+  } else {
+    messageOutput.textContent = `Wrong input. Send ${dificulty} didgit number`;
+    guessInput.value = null;
+    return;
+  }
+  message = countBoolsAndCows(guess);
+  if (boolsAndCowsQty.bools !== 3) {
+    updateHistory(message);
+    score++;
+  }
+  if (boolsAndCowsQty.bools === 3) {
+    endGame();
+  }
 });
+againBtn.addEventListener("click", function () {
+  restart();
+  answer = numGenerator(dificulty);
+  console.log(answer);
+  score = 0;
+});
+for (i = 0; i < dificultyBtns.length; i++)
+  dificultyBtns[i].addEventListener("click", function (btn) {
+    console.log(i);
+    // changeDificulty(i + 3);
+  });
