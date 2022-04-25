@@ -30,6 +30,7 @@ function numGenerator(length) {
   }
   return generated;
 }
+
 function countBoolsAndCows(guess) {
   let bools = 0;
   let cows = 0;
@@ -46,11 +47,13 @@ function countBoolsAndCows(guess) {
   boolsAndCowsQty.cows = cows;
   return `Bools: ${bools} Cows: ${cows}`;
 }
+
 function updateHistory(message) {
   messageOutput.textContent = message;
   history.textContent = history.textContent + guess + " " + message + "\n";
   guessInput.value = null;
 }
+
 function endGame() {
   messageOutput.textContent = `You win! It's ${answer}!`;
   if (hightscore > score + 1) {
@@ -61,13 +64,18 @@ function endGame() {
   guessInput.value = null;
   checkBtn.setAttribute("disabled", "true");
 }
+
 function restart() {
   guessLength.textContent = `Guess ${dificulty} digit number`;
   guessInput.value = null;
   checkBtn.removeAttribute("disabled");
   messageOutput.textContent = "Start guessing!";
   history.textContent = "";
+  answer = numGenerator(dificulty);
+  console.log(answer);
+  score = 0;
 }
+
 function changeDificulty(newDificulty) {
   dificulty = newDificulty;
   restart();
@@ -84,22 +92,19 @@ checkBtn.addEventListener("click", function () {
     return;
   }
   message = countBoolsAndCows(guess);
-  if (boolsAndCowsQty.bools !== 3) {
+  if (boolsAndCowsQty.bools !== dificulty) {
     updateHistory(message);
     score++;
   }
-  if (boolsAndCowsQty.bools === 3) {
+  if (boolsAndCowsQty.bools === dificulty) {
     endGame();
   }
 });
 againBtn.addEventListener("click", function () {
   restart();
-  answer = numGenerator(dificulty);
-  console.log(answer);
-  score = 0;
 });
-for (i = 0; i < dificultyBtns.length; i++)
+for (i = 0; i < dificultyBtns.length; i++) {
   dificultyBtns[i].addEventListener("click", function (btn) {
-    console.log(i);
-    // changeDificulty(i + 3);
+    changeDificulty(Number(btn.target.id));
   });
+}
