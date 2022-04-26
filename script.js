@@ -31,6 +31,22 @@ function numGenerator(length) {
   return generated;
 }
 
+function inputValidator(input) {
+  if (input.length === dificulty) {
+    for (let i = 0; i < dificulty; i++) {
+      let counter = 0;
+      for (let j = 0; j < dificulty; j++) {
+        if (input[i] === input[j]) counter++;
+      }
+      if (counter !== 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+  return false;
+}
+
 function countBoolsAndCows(guess) {
   let bools = 0;
   let cows = 0;
@@ -84,7 +100,7 @@ function changeDificulty(newDificulty) {
 
 checkBtn.addEventListener("click", function () {
   const inputValue = guessInput.value;
-  if (inputValue.length === dificulty) {
+  if (inputValidator(inputValue)) {
     guess = inputValue;
   } else {
     messageOutput.textContent = `Wrong input. Send ${dificulty} didgit number`;
