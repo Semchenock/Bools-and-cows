@@ -85,7 +85,7 @@ function restart() {
   guessLength.textContent = `Guess ${dificulty} digit number`;
   guessInput.value = null;
   checkBtn.removeAttribute("disabled");
-  messageOutput.textContent = "Start guessing!";
+  messageOutput.textContent = "Start guessing";
   history.textContent = "";
   answer = numGenerator(dificulty);
   console.log(answer);
