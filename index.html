@@ -8,27 +8,29 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="navBar">
-      <button class="btn again">Again</button>
-      <div>
-        <button class="btn dificulty" id="3">3</button>
-        <button class="btn dificulty" id="4">4</button>
-        <button class="btn dificulty" id="5">5</button>
+    <div class="container">
+      <div class="navBar">
+        <button class="btn again">Again</button>
+        <div>
+          <button class="btn dificulty" id="3">3</button>
+          <button class="btn dificulty" id="4">4</button>
+          <button class="btn dificulty" id="5">5</button>
+        </div>
       </div>
+      <h1>Bools and cows</h1>
+      <h2 class="guessLength">Guess 3 digit number</h2>
+      <div class="guessForm">
+        <input type="number" class="guess" />
+        <button class="btn check">
+          <img class="icon check" src="check-btn.png" />
+        </button>
+      </div>
+      <h3 class="hightscore">Hightscore: -</h3>
+      <h3>Message:</h3>
+      <p class="message">Start guessing</p>
+      <h3>History:</h3>
+      <pre class="history"></pre>
     </div>
-    <h1>Bools and cows</h1>
-    <h2 class="guessLength">Guess 3 digit number</h2>
-    <div class="guessForm">
-      <input type="number" class="guess" />
-      <button class="btn check">
-        <img class="icon check" src="check-btn.png" />
-      </button>
-    </div>
-    <h3 class="hightscore">Hightscore: -</h3>
-    <h3>Message:</h3>
-    <p class="message">Start guessing</p>
-    <h3>History:</h3>
-    <pre class="history"></pre>
     <script src="script.js"></script>
   </body>
 </html>
