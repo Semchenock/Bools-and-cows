@@ -6,6 +6,7 @@ const dificultyBtns = document.querySelectorAll(".dificulty");
 const history = document.querySelector(".history");
 const hightscoreOutput = document.querySelector(".hightscore");
 const guessLength = document.querySelector(".guessLength");
+const container = document.querySelector(".container");
 
 let dificulty = 3;
 let answer = numGenerator(dificulty);
@@ -72,13 +73,16 @@ function updateHistory(message) {
 
 function endGame() {
   messageOutput.textContent = `You win! It's ${answer}!`;
+  messageOutput.style.color = "#10c840";
   if (hightscore > score + 1) {
     hightscore = score + 1;
     hightscoreOutput.textContent = `Hightscore: ${hightscore}`;
+    hightscoreOutput.style.color = "#10c840";
   }
 
   guessInput.value = null;
   checkBtn.setAttribute("disabled", "true");
+  container.style.backgroundColor = "#736464";
 }
 
 function restart() {
@@ -90,12 +94,16 @@ function restart() {
   answer = numGenerator(dificulty);
   console.log(answer);
   score = 0;
+  hightscoreOutput.style.color = "#d24040";
+  messageOutput.style.color = "#f0f0dc";
+  container.style.backgroundColor = "#101820";
 }
 
 function changeDificulty(newDificulty) {
   dificulty = newDificulty;
   restart();
   hightscoreOutput.textContent = "Hightscore: - ";
+  guessInput.style.width = `${dificulty + 1}rem`;
 }
 
 checkBtn.addEventListener("click", function () {
