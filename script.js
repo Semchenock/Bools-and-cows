@@ -128,7 +128,7 @@ againBtn.addEventListener("click", function () {
   restart();
 });
 for (i = 0; i < dificultyBtns.length; i++) {
-  dificultyBtns[i].addEventListener("click", function (btn) {
-    changeDificulty(Number(btn.target.id));
+  dificultyBtns[i].addEventListener("click", function (e) {
+    changeDificulty(Number(e.target.id));
   });
 }
