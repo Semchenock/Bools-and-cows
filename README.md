@@ -19,5 +19,5 @@ So we keep guessing based on results of privious guesses
 1. "Again" btn resets the game without reseting hight score
 2. Bns "3","4" and "5" are dificulties of game. Click one of them to change dificulty 
 ### Hope you enjoy it!
-[Bools-and-cows game](https://semchenock.github.io/Bools-and-cows/)
+
 
